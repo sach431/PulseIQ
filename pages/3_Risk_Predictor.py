@@ -5,7 +5,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler
 
 st.set_page_config(
-    page_title=" Predictor — PulseIQ",
+    page_title="Predictor — PulseIQ",
     layout="wide",
     page_icon="🔬",
     initial_sidebar_state="expanded"
@@ -16,15 +16,13 @@ st.markdown("""
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap');
 
 :root {
-    --bg:      #f4f6fb;
-    --surface: #ffffff;
-    --border:  #e8ecf4;
-    --text:    #0f1623;
-    --muted:   #7a869a;
-    --coral:   #ff5c5c;
-    --teal:    #00b4a6;
-    --blue:    #4477ff;
-    --shadow:  0 2px 16px rgba(0,0,0,0.06);
+    --bg:      #0E0E0E;
+    --surface: #151515;
+    --border:  #2A1A1A;
+    --text:    #FFFFFF;
+    --muted:   #888888;
+    --coral:   #E0292A;
+    --shadow:  0 2px 16px rgba(0,0,0,0.4);
 }
 
 html, body, [class*="css"] {
@@ -36,10 +34,10 @@ html, body, [class*="css"] {
 
 /* Sidebar */
 section[data-testid="stSidebar"] {
-    background: var(--surface) !important;
+    background: #0A0A0A !important;
     border-right: 1px solid var(--border) !important;
 }
-section[data-testid="stSidebar"] * { color: #3a4560 !important; }
+section[data-testid="stSidebar"] * { color: #AAAAAA !important; }
 .sidebar-brand {
     font-family: 'Syne', sans-serif;
     font-size: 1.15rem;
@@ -60,11 +58,7 @@ section[data-testid="stSidebar"] * { color: #3a4560 !important; }
     margin-bottom: 0.3rem;
 }
 .page-title span { color: var(--coral); }
-.page-sub {
-    font-size: 0.82rem;
-    color: var(--muted);
-    margin-bottom: 1.6rem;
-}
+.page-sub { font-size: 0.82rem; color: var(--muted); margin-bottom: 1.6rem; }
 
 /* Section label */
 .section-label {
@@ -98,13 +92,13 @@ section[data-testid="stSidebar"] * { color: #3a4560 !important; }
     display: inline-block;
     margin-bottom: 1rem;
 }
-.tag-demo  { background:#fff0ee; color:var(--coral);  }
-.tag-card  { background:#e8f8f7; color:var(--teal);   }
-.tag-clin  { background:#eef2ff; color:var(--blue);   }
+.tag-demo { background:#2A0A0A; color:#E0292A; }
+.tag-card { background:#1A1A2A; color:#6699FF; }
+.tag-clin { background:#1A2A1A; color:#44BB88; }
 
 /* Predict button */
 div[data-testid="stButton"] > button {
-    background: linear-gradient(135deg, #ff5c5c, #ff8c69) !important;
+    background: #E0292A !important;
     color: white !important;
     border: none !important;
     border-radius: 12px !important;
@@ -114,10 +108,8 @@ div[data-testid="stButton"] > button {
     padding: 0.75rem 2rem !important;
     width: 100% !important;
     letter-spacing: 0.04em !important;
-    box-shadow: 0 4px 15px rgba(255,92,92,0.3) !important;
-    transition: all 0.2s !important;
 }
-div[data-testid="stButton"] > button:hover { opacity: 0.88 !important; transform: translateY(-1px) !important; }
+div[data-testid="stButton"] > button:hover { opacity: 0.85 !important; }
 
 /* Result panels */
 .result-panel {
@@ -126,29 +118,21 @@ div[data-testid="stButton"] > button:hover { opacity: 0.88 !important; transform
     text-align: center;
     box-shadow: var(--shadow);
 }
-.result-high { background: linear-gradient(135deg, #fff5f5, #ffe8e8); border: 1.5px solid #ffb3b3; }
-.result-low  { background: linear-gradient(135deg, #f0fdf9, #e0faf5); border: 1.5px solid #99e6da; }
-.result-icon  { font-size: 2.5rem; margin-bottom: 0.5rem; }
-.result-tag   {
-    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em;
-    text-transform: uppercase; margin-bottom: 0.4rem;
-}
-.result-pct {
-    font-family: 'Syne', sans-serif;
-    font-size: 3.8rem;
-    font-weight: 800;
-    line-height: 1;
-}
-.result-high .result-pct { color: var(--coral); }
-.result-low  .result-pct { color: var(--teal);  }
-.result-high .result-tag { color: #cc2a2a; }
-.result-low  .result-tag { color: #007a6e; }
+.result-high { background: #1A0A0A; border: 1.5px solid #E0292A; }
+.result-low  { background: #0A1A0A; border: 1.5px solid #44BB88; }
+.result-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+.result-tag  { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.4rem; }
+.result-pct  { font-family: 'Syne', sans-serif; font-size: 3.8rem; font-weight: 800; line-height: 1; }
+.result-high .result-pct { color: #E0292A; }
+.result-low  .result-pct { color: #44BB88; }
+.result-high .result-tag { color: #FF6666; }
+.result-low  .result-tag { color: #44BB88; }
 .result-desc { font-size: 0.8rem; color: var(--muted); margin-top: 0.5rem; }
 
 /* Progress bar */
-.prog-wrap { background: #e8ecf4; border-radius: 50px; height: 8px; margin: 1rem 0 0; overflow: hidden; }
-.prog-high { height: 100%; border-radius: 50px; background: linear-gradient(90deg, #ff5c5c, #ff8c69); }
-.prog-low  { height: 100%; border-radius: 50px; background: linear-gradient(90deg, #00b4a6, #4ade80); }
+.prog-wrap { background: #2A1A1A; border-radius: 50px; height: 8px; margin: 1rem 0 0; overflow: hidden; }
+.prog-high  { height: 100%; border-radius: 50px; background: #E0292A; }
+.prog-low   { height: 100%; border-radius: 50px; background: #44BB88; }
 
 /* Mini metrics */
 .mini-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; margin-bottom: 0.8rem; }
@@ -167,10 +151,11 @@ div[data-testid="stButton"] > button:hover { opacity: 0.88 !important; transform
 .advice-box {
     background: var(--surface);
     border: 1px solid var(--border);
+    border-left: 3px solid var(--coral);
     border-radius: 12px;
     padding: 1rem 1.2rem;
     font-size: 0.83rem;
-    color: #3a4560;
+    color: #AAAAAA;
     line-height: 1.65;
     box-shadow: var(--shadow);
 }
@@ -178,15 +163,18 @@ div[data-testid="stButton"] > button:hover { opacity: 0.88 !important; transform
 
 /* Widget overrides */
 div[data-testid="stSlider"] label,
-div[data-testid="stSelectbox"] label { color: #3a4560 !important; font-size: 0.8rem !important; }
+div[data-testid="stSelectbox"] label { color: #AAAAAA !important; font-size: 0.8rem !important; }
 div[data-baseweb="select"] > div {
-    background: #f4f6fb !important;
+    background: #1A1A1A !important;
     border-color: var(--border) !important;
     border-radius: 10px !important;
+    color: #FFFFFF !important;
 }
 hr { border-color: var(--border) !important; }
-#MainMenu, footer, header { visibility: hidden; }
-.stDeployButton { display: none; }
+#MainMenu, footer { visibility: hidden; }
+header { visibility: visible !important; background: #0E0E0E !important; }
+.stDeployButton { display: block !important; }
+[data-testid="collapsedControl"] { display: flex !important; visibility: visible !important; color: #E0292A !important; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -209,13 +197,13 @@ model, scaler = train_model()
 with st.sidebar:
     st.markdown('<div class="sidebar-brand">🫀 CardioSense</div>', unsafe_allow_html=True)
     st.markdown("""
-    <div style="font-size:0.78rem;color:#7a869a;line-height:1.7;">
-    Uses <strong style="color:#ff5c5c">Logistic Regression</strong> trained on UCI Heart Disease dataset (Cleveland, n=297).<br><br>
-    <span style="color:#b0b8cc;font-size:0.7rem;">⚠ For educational use only. Not a substitute for medical advice.</span>
+    <div style="font-size:0.78rem;color:#888888;line-height:1.7;">
+    Uses <strong style="color:#E0292A">Logistic Regression</strong> for cardiovascular risk prediction.<br><br>
+    <span style="color:#555555;font-size:0.7rem;">⚠ For educational use only. Not a substitute for medical advice.</span>
     </div>
     """, unsafe_allow_html=True)
     st.markdown("---")
-    st.markdown('<p style="font-size:0.65rem;color:#b0b8cc;">MODEL: LOGISTIC REGRESSION<br/>ACCURACY: ~83–85%<br/>FEATURES: 13</p>', unsafe_allow_html=True)
+    st.markdown('<p style="font-size:0.65rem;color:#444444;">MODEL: LOGISTIC REGRESSION<br/>ACCURACY: ~83–85%<br/>FEATURES: 13</p>', unsafe_allow_html=True)
 
 # ── Header ────────────────────────────────────────────────────────────────────
 st.markdown('<div class="page-title">PulseIQ Risk <span>Engine</span></div>', unsafe_allow_html=True)
@@ -256,13 +244,13 @@ st.markdown('<div class="section-label">⚡ Result</div>', unsafe_allow_html=Tru
 clicked = st.button("Analyse Risk Profile", use_container_width=True)
 
 if clicked:
-    sex_v  = 1 if sex == "Male" else 0
-    cp_v   = int(cp.split("(")[1].replace(")",""))
-    fbs_v  = int(fbs.split("(")[1].replace(")",""))
-    ecg_v  = int(restecg.split("(")[1].replace(")",""))
-    ex_v   = int(exang.split("(")[1].replace(")",""))
-    sl_v   = int(slope.split("(")[1].replace(")",""))
-    th_v   = int(thal.split("(")[1].replace(")",""))
+    sex_v = 1 if sex == "Male" else 0
+    cp_v  = int(cp.split("(")[1].replace(")",""))
+    fbs_v = int(fbs.split("(")[1].replace(")",""))
+    ecg_v = int(restecg.split("(")[1].replace(")",""))
+    ex_v  = int(exang.split("(")[1].replace(")",""))
+    sl_v  = int(slope.split("(")[1].replace(")",""))
+    th_v  = int(thal.split("(")[1].replace(")",""))
 
     X = np.array([[age, sex_v, cp_v, trestbps, chol, fbs_v,
                    ecg_v, thalach, ex_v, oldpeak, sl_v, ca, th_v]])

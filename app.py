@@ -222,7 +222,6 @@ with st.sidebar:
     gender    = st.multiselect("Gender", options=list(df['sex_label'].unique()), default=list(df['sex_label'].unique()))
     age_range = st.slider("Age Range", int(df['age'].min()), int(df['age'].max()), (30, 65))
     st.markdown("---")
-    st.markdown('<p style="font-size:0.68rem;color:#444444;">UCI Heart Disease Dataset<br/>Cleveland · 297 patients</p>', unsafe_allow_html=True)
 
 filtered = df[df['sex_label'].isin(gender) & df['age'].between(*age_range)]
 d_pct = round(filtered['target'].mean()*100, 1) if len(filtered) else 0
